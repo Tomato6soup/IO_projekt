@@ -1,0 +1,1 @@
+self.__SSG_MANIFEST=new Set(["\u002Fbonus","\u002Fcareer","\u002Fprices","\u002Fpromocodes"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
