@@ -1,4 +1,5 @@
 
+
 /* INDEX:
 
     =GENERAL
@@ -20,7 +21,7 @@
 
 body {
     /*background: #000000 url(images/background.png) left top repeat-x;*/
-    color: #C2C2C2; 
+    color: #C2C2C2;
     background-image: url('../../../uploads/2025/01/nsf_bayda3d.jpg'); /* Ścieżka do zdjęcia */
     background-attachment: fixed; /* Przywiązuje zdjęcie do widoku */
     background-position: center; /* Centruje zdjęcie */
@@ -54,7 +55,8 @@ a:focus {
 	padding: 15px;	
     background: #000000;
     margin-top: 30px;
-    padding-bottom: 0;
+    /*padding-bottom: 0*/;
+
 }
 
 #main-fullwidth {
@@ -66,6 +68,7 @@ a:focus {
     overflow: hidden;
     float: left;
     width: 635px;
+    margin-bottom: 0px;
 }
 
 #sidebar-primary {
@@ -301,10 +304,11 @@ float: right;
 ----------------------------*/
 
 .post {
-    margin-bottom: 15px;
+    
     border: 1px solid #2E2E2E;
     background: #1B1A1A; 
     padding: 10px 10px 0 10px;
+    margin: 0 0 15px 0;
 }
 
 .page, .post-single {
