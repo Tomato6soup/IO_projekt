@@ -128,50 +128,57 @@ Polecam, bardzo fajne!</p>
 		
 		
             </ol>
-            <?php
-// Połączenie z bazą danych
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "komentarze";
+            <ol class="commentlist">
+    <?php
+    // Połączenie z bazą danych
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "komentarze";
 
-// Tworzenie połączenia
-$conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Sprawdzanie połączenia
-if ($conn->connect_error) {
-    die("Połączenie nie powiodło się: " . $conn->connect_error);
-}
-
-// Pobranie komentarzy z tabeli
-$sql = "SELECT imie, komentarz, email, website FROM comments ORDER BY id DESC";
-$result = $conn->query($sql);
-?>
-
-<h3 id="comments-title"><em>Komentarze:</em></h3>
-<ol class="commentlist">
-<?php
-if ($result->num_rows > 0) {
-    // Wyświetlanie każdego komentarza
-    while ($row = $result->fetch_assoc()) {
-        echo "<li class='comment'>";
-        echo "<div class='comment-body'>";
-        echo "<strong>" . htmlspecialchars($row['imie']) . "</strong>: ";
-        echo "<p>" . htmlspecialchars($row['komentarz']) . "</p>";
-        echo "<p><a href='mailto:" . htmlspecialchars($row['email']) . "'>" . htmlspecialchars($row['email']) . "</a>";
-        if (!empty($row['website'])) {
-            echo " | <a href='" . htmlspecialchars($row['website']) . "' target='_blank'>Strona</a>";
-        }
-        echo "</p>";
-        echo "</div>";
-        echo "</li>";
+    if ($conn->connect_error) {
+        die("Połączenie nie powiodło się: " . $conn->connect_error);
     }
-} else {
-    echo "<p>Brak komentarzy.</p>";
-}
-$conn->close();
-?>
+
+    // Pobranie komentarzy z tabeli
+    $sql = "SELECT id, imie, komentarz, email FROM comments ORDER BY id DESC"; // Usunięto `website` z zapytania
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // Wyświetlanie komentarzy
+        while ($row = $result->fetch_assoc()) {
+            $imie = htmlspecialchars($row['imie']);
+            $komentarz = nl2br(htmlspecialchars($row['komentarz'])); // Wyświetlanie tekstu komentarza
+            $email = htmlspecialchars($row['email']);
+            $avatar_hash = md5(strtolower(trim($email)));
+            $avatar_url = "https://www.gravatar.com/avatar/{$avatar_hash}?s=32&d=identicon";
+
+            echo "<li class='comment' id='comment-{$row['id']}'>";
+            echo "<div id='div-comment-{$row['id']}' class='comment-body'>";
+            echo "<div class='comment-imie vcard'>";
+            echo "<img alt='' src='{$avatar_url}' class='avatar avatar-32 photo' height='32' width='32'>";
+            echo "<cite class='fn'>{$imie}</cite><span class='says'>:</span>";
+            echo "</div>";
+
+            echo "<div class='comment-meta commentmetadata'>";
+            echo "<a href='#comment-{$row['id']}'>" . date('d.m.Y o H:i') . "</a>";
+            echo "</div>";
+
+            echo "<p>{$komentarz}</p>"; // Wyświetlanie tylko komentarza
+
+            echo "</div>";
+            echo "</li>";
+        }
+    } else {
+        echo "<p>Brak komentarzy.</p>";
+    }
+
+    $conn->close();
+    ?>
 </ol>
+
                         
         </div><!-- #comments -->
         
@@ -180,12 +187,14 @@ $conn->close();
 				<h3 id="reply-title">Dodać komentarz <small><a rel="nofollow" id="cancel-comment-reply-link" href="index.htm#respond" style="display:none;">Anuluj odpowiedź</a></small></h3>
 									<form action="../comments.php" method="post" id="commentform">
 									<p class="comment-notes">Twój adres e-mail nie zostanie opublikowany. Wymagane pola są oznaczone <span class="required">*</span></p>							
-                                    <p class="comment-form-imie"><label for="imie">Imię</label> <span class="required">*</span>
+                                    <p class="comment-form-imie">    <label for="imie">Imię</label>         <span class="required">*</span>
                                     <input id="imie" name="imie" type="text" value="" size="30" aria-required='true'></p>
-                                    <p class="comment-form-email"><label for="email">E-mail</label> <span class="required">*</span><input id="email" name="email" type="text" value="" size="30" aria-required='true'></p>
-                                    <p class="comment-form-url"><label for="website">Web-strona</label><input id="url" name="url" type="text" value="" size="30"></p>
-									<p class="comment-form-comment"><label for="komentarz">Komentarz</label><textarea id="comment" name="comment-c28ad17a64fbf3acdfbe" cols="45" rows="8" aria-required="true"></textarea><textarea name="comment" rows="1" cols="1" style="display:none"></textarea></p><input type="hidden" name="comment-replaced" value="true">						
+                                    <p class="comment-form-email">   <label for="email">E-mail</label>      <span class="required">*</span><input id="email" name="email" type="text" value="" size="30" aria-required='true'></p>
+                                    <p class="comment-form-url">     <label for="website">Web-strona</label>                               <input id="url" name="url" type="text" value="" size="30"></p>
+									<p class="comment-form-comment"> <label for="komentarz">Komentarz</label>  <textarea id="comment" name="comment-c28ad17a64fbf3acdfbe" cols="45" rows="8" aria-required="true"></textarea>
+                                                                                                               <textarea name="comment" rows="1" cols="1" style="display:none"></textarea></p><input type="hidden" name="comment-replaced" value="true">						
                                     <p class="form-allowed-tags">Można użyć następujących elementów <abbr title="HyperText Markup Language">HTML</abbr>-tags and atributy:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>						<p class="form-submit">
+                                    
                                     <input name="submit" type="submit" id="submit" value="Wyślij komentarz">
                                     <input type='hidden' name='comment_post_ID' value='4676' id='comment_post_ID'>
                                     <input type='hidden' name='comment_parent' id='comment_parent' value='0'>
@@ -211,17 +220,17 @@ $conn->close();
         
 <div id="sidebar-primary">
 
-    <ul class="widget-container"><li class="banners-125"><a href="https://vkino.com.ua/ua/cinema/zaporozhe/bayda" title="">
+    <ul class="widget-container"><li class="banners-125"><a title="">
         <img src="../images/2024/12/%D0%9C%D1%83%D1%84%D0%B0%D1%81%D0%B0_%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D1%801.jpg"></a>
-        <a href="https://vkino.com.ua/ua/cinema/zaporozhe/bayda" title="">
+        <a title="">
             <img src="../images/2024/12/%D0%9C%D1%83%D1%84%D0%B0%D1%81%D0%B0_%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D1%804.jpg"></a>
-            <a href="https://vkino.com.ua/ua/cinema/zaporozhe/bayda" title="">
+            <a title="">
                 <img src="../images/2024/12/%D0%9C%D1%83%D1%84%D0%B0%D1%81%D0%B0_%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D1%805.jpg"></a>
-                <a href="https://vkino.com.ua/ua/cinema/zaporozhe/bayda" title="">
+                <a title="">
                     <img src="../images/2024/12/%D0%9C%D1%83%D1%84%D0%B0%D1%81%D0%B0_%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D1%803.jpg"></a>
-                    <a href="https://vkino.com.ua/ua/cinema/zaporozhe/bayda" title="">
+                    <a title="">
                         <img src="../images/2024/12/%D0%9C%D1%83%D1%84%D0%B0%D1%81%D0%B0_%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D1%808.jpg"></a>
-                        <a href="https://vkino.com.ua/ua/cinema/zaporozhe/bayda" title="">
+                        <a title="">
                             <img src="../images/2024/12/%D0%9C%D1%83%D1%84%D0%B0%D1%81%D0%B0_%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D1%802.jpg"></a>
                               
 </div><!-- #sidebar-primary -->

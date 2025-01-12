@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $imie = $_POST['imie'];
     $email = $_POST['email'];
     $website = $_POST['url'];
-    $komentarz = $_POST['komentarz'];
+    $komentarz = $_POST['comment'];
 
     // Sanityzacja danych (proste oczyszczenie z niebezpiecznych znaków)
     $imie = htmlspecialchars($imie, ENT_QUOTES, 'UTF-8');
