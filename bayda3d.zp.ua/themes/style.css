@@ -19,6 +19,7 @@
 /* =GENERAL
 -------------------------------------------------------------- */
 
+
 body {
     /*background: #000000 url(images/background.png) left top repeat-x;*/
     color: #C2C2C2;
@@ -1435,6 +1436,136 @@ h3#reply-title {
 
 #respond dd {
     display: inline;
+}
+
+
+
+@media screen and (orientation: portrait) {
+
+    /* General adjustments */
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+    #container {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    #header {
+        height: auto;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .logo img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .menu-primary-container {
+        display: flex;
+        flex-direction: column; /* Ustaw elementy w kolumnie */
+        align-items: stretch; /* Przyciski rozciągają się na całą szerokość */
+        padding: 0;
+    }
+
+    .menu-primary li {
+        width: 100%; /* Przyciski zajmują całą szerokość */
+        margin: 0; /* Usuń marginesy */
+    }
+
+    .menu-primary li a {
+        display: block;
+        text-align: center; /* Wyrównanie tekstu */
+        padding: 15px 0; /* Dostosuj odstępy w pionie */
+        font-size: 16px; /* Zwiększ czytelność na małych ekranach */
+        background-color: #1B1A1A; /* Kolor tła */
+        color: #FFFFFF; /* Kolor tekstu */
+        text-decoration: none;
+        border-bottom: 1px solid #1E63B3; /* Dodanie delikatnej linii podziału */
+    }
+
+    .menu-primary li a:hover {
+        background-color: #1E63B3; /* Kolor tła na hover */
+    }
+   /* .menu-primary-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-primary li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .menu-primary li a {
+        display: block;
+        padding: 10px 0;
+        font-size: 14px;
+        background-color: #124591;
+        margin: 2px 0;
+    }
+
+    .menu-primary li a:hover {
+        background-color: #1E63B3;
+    }*/
+
+    /* Main content adjustments */
+    #main {
+        padding: 10px;
+        margin: 0;
+    }
+
+    #content {
+        width: 100%;
+        float: none;
+    }
+
+    #sidebar-primary {
+        width: 100%;
+        float: none;
+        margin: 15px 0;
+    }
+
+    /* Images and featured content */
+    .featured-image-container img,
+    .fp-thumbnail img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Post adjustments */
+    .post {
+        padding: 10px;
+        margin: 10px 0;
+    }
+
+    .post img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .post img.alignleft {
+        width: 50%; /* Obrazek zajmuje 50% szerokości kontenera */
+        height: auto; /* Zachowuje proporcje */
+        float: none; /* Wyłączenie opływania tekstem dla lepszego układu na mobilnych */
+        margin: 0 auto; /* Wyrównanie obrazu na środku */
+        display: block; /* Ustawienie obrazu jako blokowego elementu */
+    }
+
+    /* Footer adjustments */
+    #footer {
+        text-align: center;
+    }
+
+    #copyrights {
+        padding: 10px;
+        font-size: 12px;
+    }
 }
 
 /* =END
