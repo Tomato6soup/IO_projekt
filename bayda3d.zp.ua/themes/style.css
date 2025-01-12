@@ -507,7 +507,11 @@ float: right;
 -------------------------------------------------------------- */
 
 .fp-slider {
-    margin: 0 0 15px 0;
+    
+    display: flex; /* Włączenie układu flexbox */
+    justify-content: center; /* Centrowanie w poziomie */
+    align-items: center; /* Centrowanie w pionie (jeśli potrzebne) */
+    margin-bottom: 15px;
 }
 
 .fp-slides-container {}
@@ -1470,18 +1474,25 @@ h3#reply-title {
         flex-direction: column; /* Ustaw elementy w kolumnie */
         align-items: stretch; /* Przyciski rozciągają się na całą szerokość */
         padding: 0;
+        margin-bottom: 304px;
     }
 
     .menu-primary li {
         width: 100%; /* Przyciski zajmują całą szerokość */
-        margin: 0; /* Usuń marginesy */
+        margin: 0; /* Usuń marginesy między elementami listy */
+        padding: 0; /* Usuń marginesy */
     }
 
     .menu-primary li a {
-        display: block;
-        text-align: center; /* Wyrównanie tekstu */
-        padding: 15px 0; /* Dostosuj odstępy w pionie */
-        font-size: 16px; /* Zwiększ czytelność na małych ekranach */
+        display: block; /* Zapewnia, że link wypełnia całą przestrzeń */
+        padding: 20px 20px; /* Wewnętrzne odstępy w przycisku */
+        text-align: center;
+        text-decoration: none;
+        line-height: 1; /* Ustaw spójny odstęp w linii */
+        position: relative; /* Przygotowanie na zastosowanie gradientu */
+        box-sizing: border-box;
+        font-size: 26px; /* Zwiększ czytelność na małych ekranach */
+        font-weight: bold;
         background-color: #1B1A1A; /* Kolor tła */
         color: #FFFFFF; /* Kolor tekstu */
         text-decoration: none;
@@ -1491,30 +1502,18 @@ h3#reply-title {
     .menu-primary li a:hover {
         background-color: #1E63B3; /* Kolor tła na hover */
     }
-   /* .menu-primary-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+
+    .menu-primary li a:hover, .menu-primary li a:active, .menu-primary li a:focus, 
+    .menu-primary li:hover > a, .menu-primary li.current-cat > a, .menu-primary li.current_page_item > a, .menu-primary li.current-menu-item > a {
+        color: #FFFFFF;
+        outline: 0;
+        background: url(images/menu-primary-bg.png) right -132px repeat-x;
+        background: linear-gradient(to bottom, #124591, #1E63B3); /* Gradient */
+        background-size: 100% 100%; /* Gradient obejmuje całą przestrzeń */
+        background-repeat: no-repeat; /* Brak powtarzania tła */
+        border: none;
     }
 
-    .menu-primary li {
-        width: 100%;
-        text-align: center;
-    }
-
-    .menu-primary li a {
-        display: block;
-        padding: 10px 0;
-        font-size: 14px;
-        background-color: #124591;
-        margin: 2px 0;
-    }
-
-    .menu-primary li a:hover {
-        background-color: #1E63B3;
-    }*/
-
-    /* Main content adjustments */
     #main {
         padding: 10px;
         margin: 0;
@@ -1538,10 +1537,14 @@ h3#reply-title {
         height: auto;
     }
 
+    .fp-slider {
+        margin-top: 15px; /* Odstęp między menu a bannerem */
+    }
+
     /* Post adjustments */
     .post {
         padding: 10px;
-        margin: 10px 0;
+        margin: 10px 10px 10px 10px;
     }
 
     .post img {
