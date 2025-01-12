@@ -111,9 +111,9 @@ body.custom-background { background-color: #000000;
             <h3 id="comments-title"><em>Komentarze:</em></h3>
             
             <ol class="commentlist">
-    		  		<li class="comment byuser comment-author-f1ght3r bypostauthor even thread-even depth-1" id="comment-2787">
+    		  		<li class="comment byuser comment-imie-f1ght3r bypostimie even thread-even depth-1" id="comment-2787">
 				<div id="div-comment-2787" class="comment-body">
-				<div class="comment-author vcard">
+				<div class="comment-imie vcard">
 		<img alt='' src='http://1.gravatar.com/avatar/5348c1f47ce5bb092bb0a26c06d57833?s=32&d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&r=G' class='avatar avatar-32 photo' height='32' width='32'>		<cite class="fn">Top Fan</cite><span class="says">:</span>		</div>
 
 		<div class="comment-meta commentmetadata"><a href="index.htm#comment-2787">
@@ -128,7 +128,50 @@ Polecam, bardzo fajne!</p>
 		
 		
             </ol>
-            
+            <?php
+// Połączenie z bazą danych
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "komentarze";
+
+// Tworzenie połączenia
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Sprawdzanie połączenia
+if ($conn->connect_error) {
+    die("Połączenie nie powiodło się: " . $conn->connect_error);
+}
+
+// Pobranie komentarzy z tabeli
+$sql = "SELECT imie, komentarz, email, website FROM comments ORDER BY id DESC";
+$result = $conn->query($sql);
+?>
+
+<h3 id="comments-title"><em>Komentarze:</em></h3>
+<ol class="commentlist">
+<?php
+if ($result->num_rows > 0) {
+    // Wyświetlanie każdego komentarza
+    while ($row = $result->fetch_assoc()) {
+        echo "<li class='comment'>";
+        echo "<div class='comment-body'>";
+        echo "<strong>" . htmlspecialchars($row['imie']) . "</strong>: ";
+        echo "<p>" . htmlspecialchars($row['komentarz']) . "</p>";
+        echo "<p><a href='mailto:" . htmlspecialchars($row['email']) . "'>" . htmlspecialchars($row['email']) . "</a>";
+        if (!empty($row['website'])) {
+            echo " | <a href='" . htmlspecialchars($row['website']) . "' target='_blank'>Strona</a>";
+        }
+        echo "</p>";
+        echo "</div>";
+        echo "</li>";
+    }
+} else {
+    echo "<p>Brak komentarzy.</p>";
+}
+$conn->close();
+?>
+</ol>
                         
         </div><!-- #comments -->
         
@@ -136,15 +179,20 @@ Polecam, bardzo fajne!</p>
                                         <p>&nbsp;</p>
 				<h3 id="reply-title">Dodać komentarz <small><a rel="nofollow" id="cancel-comment-reply-link" href="index.htm#respond" style="display:none;">Anuluj odpowiedź</a></small></h3>
 									<form action="../comments.php" method="post" id="commentform">
-																			<p class="comment-notes">Twój adres e-mail nie zostanie opublikowany. Wymagane pola są oznaczone <span class="required">*</span></p>							<p class="comment-form-author"><label for="author">Imię</label> <span class="required">*</span><input id="author" name="author" type="text" value="" size="30" aria-required='true'></p>
-<p class="comment-form-email"><label for="email">E-mail</label> <span class="required">*</span><input id="email" name="email" type="text" value="" size="30" aria-required='true'></p>
-<p class="comment-form-url"><label for="url">Web-strona</label><input id="url" name="url" type="text" value="" size="30"></p>
-												<p class="comment-form-comment"><label for="comment">Komentarz</label><textarea id="comment" name="comment-c28ad17a64fbf3acdfbe" cols="45" rows="8" aria-required="true"></textarea><textarea name="comment" rows="1" cols="1" style="display:none"></textarea></p><input type="hidden" name="comment-replaced" value="true">						<p class="form-allowed-tags">Można użyć następujących elementów <abbr title="HyperText Markup Language">HTML</abbr>-tags and atributy:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>						<p class="form-submit">
-							<input name="submit" type="submit" id="submit" value="Wyślij komentarz">
-							<input type='hidden' name='comment_post_ID' value='4676' id='comment_post_ID'>
-<input type='hidden' name='comment_parent' id='comment_parent' value='0'>
+									<p class="comment-notes">Twój adres e-mail nie zostanie opublikowany. Wymagane pola są oznaczone <span class="required">*</span></p>							
+                                    <p class="comment-form-imie"><label for="imie">Imię</label> <span class="required">*</span>
+                                    <input id="imie" name="imie" type="text" value="" size="30" aria-required='true'></p>
+                                    <p class="comment-form-email"><label for="email">E-mail</label> <span class="required">*</span><input id="email" name="email" type="text" value="" size="30" aria-required='true'></p>
+                                    <p class="comment-form-url"><label for="website">Web-strona</label><input id="url" name="url" type="text" value="" size="30"></p>
+									<p class="comment-form-comment"><label for="komentarz">Komentarz</label><textarea id="comment" name="comment-c28ad17a64fbf3acdfbe" cols="45" rows="8" aria-required="true"></textarea><textarea name="comment" rows="1" cols="1" style="display:none"></textarea></p><input type="hidden" name="comment-replaced" value="true">						
+                                    <p class="form-allowed-tags">Można użyć następujących elementów <abbr title="HyperText Markup Language">HTML</abbr>-tags and atributy:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>						<p class="form-submit">
+                                    <input name="submit" type="submit" id="submit" value="Wyślij komentarz">
+                                    <input type='hidden' name='comment_post_ID' value='4676' id='comment_post_ID'>
+                                    <input type='hidden' name='comment_parent' id='comment_parent' value='0'>
 						</p>
-						<p style="display:none;"><input type="text" name="nxts" value="1736602112"><input type="text" name="nxts_signed" value="d986ddcb27182675bfb2862f573345421237c5a0"><input type="text" name="3fce654fab77db57477c" value="b822e5351d38d53978c72e1c9"><input type="text" name="faa79bcaaa" value=""></p>					</form>
+						<p style="display:none;"><input type="text" name="nxts" value="1736602112"><input type="text" name="nxts_signed" value="d986ddcb27182675bfb2862f573345421237c5a0"><input type="text" name="3fce654fab77db57477c" value="b822e5351d38d53978c72e1c9"><input type="text" name="faa79bcaaa" value=""></p>					
+                    </form>
+                    
 							</div><!-- #respond -->
 			        <script type="text/javascript">
             jQuery(document).ready(function () {
