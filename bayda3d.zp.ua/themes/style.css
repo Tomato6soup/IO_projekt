@@ -507,11 +507,7 @@ float: right;
 -------------------------------------------------------------- */
 
 .fp-slider {
-    
-    display: flex; /* Włączenie układu flexbox */
-    justify-content: center; /* Centrowanie w poziomie */
-    align-items: center; /* Centrowanie w pionie (jeśli potrzebne) */
-    margin-bottom: 15px;
+    margin: 0 0 15px 0;
 }
 
 .fp-slides-container {}
@@ -1474,7 +1470,7 @@ h3#reply-title {
         flex-direction: column; /* Ustaw elementy w kolumnie */
         align-items: stretch; /* Przyciski rozciągają się na całą szerokość */
         padding: 0;
-        margin-bottom: 304px;
+        margin-bottom: 305px;
     }
 
     .menu-primary li {
@@ -1538,7 +1534,10 @@ h3#reply-title {
     }
 
     .fp-slider {
-        margin-top: 15px; /* Odstęp między menu a bannerem */
+        display: flex; /* Włączenie układu flexbox */
+        justify-content: center; /* Centrowanie w poziomie */
+        align-items: center; /* Centrowanie w pionie (jeśli potrzebne) */
+        margin: 15px; /* Zapewnienie wyrównania do środka w układzie */
     }
 
     /* Post adjustments */
