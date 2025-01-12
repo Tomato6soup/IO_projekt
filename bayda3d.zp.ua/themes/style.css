@@ -76,7 +76,7 @@ a:focus {
 	float: left;
     width: 280px;
     margin-left: 15px;
-    background: #1D1D1D;
+    background: #1B1A1A;
 }
 
 #sidebar-secondary {
@@ -305,7 +305,7 @@ float: right;
 
 .post {
     
-    border: 1px solid #2E2E2E;
+    /*border: 1px solid #2E2E2E;*/
     background: #1B1A1A; 
     padding: 10px 10px 0 10px;
     margin: 0 0 15px 0;
@@ -563,7 +563,7 @@ float: right;
     height: 12px;
     text-align: center;
     padding: 10px 0;
-    background: #1D1D1D;
+    background: #1B1A1A;
 }
 
 .fp-pager a { 
@@ -1232,8 +1232,8 @@ h3#comments-title {
 .comment-author {
     padding: 5px;
     display: block;
-    background: #F2F2F2;
-    border: 1px solid #DFDFDF;
+    background: #1B1A1A;
+    /*border: 1px solid #DFDFDF;*/
     -moz-border-radius: 4px;
     -khtml-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -1389,11 +1389,17 @@ h3#reply-title {
 
 #respond input {
     margin:10px 0 0 0;
+    border: 1px solid #767676;
+    color: #fff;
+    background:#1B1A1A;
     width:98%;
 }
 
 #respond textarea {
     width:98%;
+    color: #fff;
+    font-family: Arial, Helvetica, Sans-serif;
+    background:#1B1A1A;
     margin:10px 0 0 0;
 }
 
