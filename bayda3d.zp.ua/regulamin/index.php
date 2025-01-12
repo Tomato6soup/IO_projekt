@@ -191,10 +191,18 @@ Polecam, bardzo fajne!</p>
                                     <input id="imie" name="imie" type="text" value="" size="30" aria-required='true'></p>
                                     <p class="comment-form-email">   <label for="email">E-mail</label>      <span class="required">*</span><input id="email" name="email" type="text" value="" size="30" aria-required='true'></p>
                                     <p class="comment-form-url">     <label for="website">Web-strona</label>                               <input id="url" name="url" type="text" value="" size="30"></p>
-									<p class="comment-form-comment"> <label for="komentarz">Komentarz</label>  <textarea id="comment" name="comment-c28ad17a64fbf3acdfbe" cols="45" rows="8" aria-required="true"></textarea>
-                                                                                                               <textarea name="comment" rows="1" cols="1" style="display:none"></textarea></p><input type="hidden" name="comment-replaced" value="true">						
-                                    <p class="form-allowed-tags">Można użyć następujących elementów <abbr title="HyperText Markup Language">HTML</abbr>-tags and atributy:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>						<p class="form-submit">
+									
                                     
+                                    
+                                    <p class="comment-form-comment"> 
+                                    <label for="komentarz">Komentarz</label>
+                                    <textarea id="komentarz" name="komentarz" cols="45" rows="8" aria-required="true"></textarea>
+                                </p>
+                                    
+                                    
+                                    
+                                    <input type="hidden" name="comment-replaced" value="true">						
+                                    <p class="form-allowed-tags">Można użyć następujących elementów <abbr title="HyperText Markup Language">HTML</abbr>-tags and atributy:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>						<p class="form-submit">
                                     <input name="submit" type="submit" id="submit" value="Wyślij komentarz">
                                     <input type='hidden' name='comment_post_ID' value='4676' id='comment_post_ID'>
                                     <input type='hidden' name='comment_parent' id='comment_parent' value='0'>
